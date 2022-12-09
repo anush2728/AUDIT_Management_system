@@ -39,6 +39,9 @@
     {% csrf_token %}
     <div>
       <a type="button" class="btn btn-outline-success" href="/createnewuser">Add New User</a>
+    </div>
+    <div>
+      <a type="button" class="btn btn-outline-success" href="/edituser">Edit Users</a>
     </div>  
     <caption><b>List of Users</b></caption>  
   <div class="table-container">
@@ -52,6 +55,7 @@
         <th scope="col">Email</th>
         <th scope="col">Contact Number</th>
         <th scope="col">Type of User</th>
+        <th scope="col">Available subcontractors to be assigned </th>
       </tr>
     </thead>
     <tbody >
@@ -63,7 +67,8 @@
         <td>{{a.last_name}}</td>
         <td>{{a.email}}</td>
         <td>{{a.contact_number}}</td>
-            <td>{{a.role}}</td>
+        <td>{{a.role}}</td>
+        <td>{{a.no_sub}}</td>
       </tr>
       {% endfor %} 
     </tbody>

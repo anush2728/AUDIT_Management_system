@@ -16,6 +16,7 @@ def create_json():
 
 class User(AbstractUser):        
     contact_number=models.BigIntegerField(null=True)
+    no_sub=models.BigIntegerField(null=True)
     class Role(models.TextChoices):
         ADMIN = 'Admin'
         AUDITOR = 'Auditor'
@@ -89,8 +90,8 @@ class Event(models.Model):
     audit = models.ForeignKey(to=Auditor,on_delete=models.CASCADE,null=True,related_name='auditor')
     sub = models.ForeignKey(to=Subcontractor,on_delete=models.CASCADE,null=True,related_name='subcontractor')
     #description = models.TextField(blank=True,null=True)
-    event_date = models.DateTimeField('Event Date',max_length=30)
-    event_time = models.DateTimeField('Event Time',max_length=30)
+    event_date = models.DateField('Event Date',max_length=30)
+    event_time = models.TimeField('Event Time',max_length=30)
     acts = models.JSONField(default=create_json)
     
     def __str__(self):

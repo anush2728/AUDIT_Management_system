@@ -56,8 +56,8 @@ def events(request):
         sub = request.POST['Subcontractor']
         evet = request.POST['date']
         eved = request.POST['time']
-       # esdata = Event.objects.create()
-       # esdata.save(audit=Aud,sub=sub,)
+        esdata = Event.objects.create()
+        esdata.save(audit=Aud,sub=sub,)
         return render(request,'adminpage.html')
     else:
         s=Subcontractor.subcontractor.all()
@@ -71,7 +71,12 @@ def actmaster(request):
 
 def userlist(request):
     userl = User.objects.all()
-    return render(request,'userlist.html',{'userl': userl})    
+    return render(request,'userlist.html',{'userl': userl})
+
+def edituser(request):
+    userl = User.objects.all() 
+    return render(request,'edituser.html',{'userl': userl})
+
 
 def newact(request):
     if (request.method == 'POST'):
@@ -99,7 +104,7 @@ def createnewuser(request):
         password1 = request.POST['psw']
         password2 = request.POST['psw-repeat']
         contact_number = request.POST['telphone']
-        role = request.POST['choose']
+        role = request.POST['choose'] 
         if password1==password2:
             if User.objects.filter(username=username).exists():
                 messages.info(request,'Username Taken!')
@@ -108,9 +113,10 @@ def createnewuser(request):
                 messages.info(request,'E-mail Taken!')
                 return redirect('createnewuser')
             else:
-                print(role)
-                user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name,last_name=last_name,role=role,contact_number=contact_number)
-                
+                if(role=='Auditor'):
+                    user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name,last_name=last_name,role=role,contact_number=contact_number,no_sub=10)
+                else:
+                    user = User.objects.create_user(username=username,password=password1,email=email,first_name=first_name,last_name=last_name,role=role,contact_number=contact_number) 
         
                 '''
                 if allot:
@@ -126,6 +132,9 @@ def createnewuser(request):
         return redirect('createnewuser')
     else:
         return render(request,'createnewuser.html',context)
+
+def viewprofile(request):
+    return render(request,'viewprofile.html')        
 
 def logoutpage(request):
     logout(request)

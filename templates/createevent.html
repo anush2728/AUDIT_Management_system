@@ -88,7 +88,7 @@ body {
           <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
           <script src="{% static 'js/bootstrap.min.js' %}"></script>  
           {% csrf_token %}
-          <h1>Register Your Events</h1>
+          <h1>Create Your Events</h1>
           <hr>
       
           <label for="en"><br></br></label>
@@ -110,13 +110,34 @@ body {
           </select>
          
           <br>
-
-          <b>Select Act:</b>
-          <select name="choose" id="type" style="max-width:30%; background-color:transparent; "  class="form-select" >
-            {% for ad in ac %}
-            <option value="Acts">{{ad.act_name}}</option>
-            {% endfor %}
-          </select>
+          <div class="container">
+            {% csrf_token %} 
+            <caption><b>List of Acts</b></caption>  
+          <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Act Name</th>
+                <th scope="col">Act Short Name</th>
+                <th scope="col">Select Act</th>
+              </tr>
+            </thead>
+            <tbody >
+              {% for a in ac %}
+              <tr>
+                <td>{{ a.act_name }}</td>
+                <td>{{ a.act_shname }}</td>
+                <td><div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                  </label>
+                </div></td>
+              </tr>
+              {% endfor %} 
+            </tbody>
+          </table> 
+          </div>
+          </div>
          
           <br>
           <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
