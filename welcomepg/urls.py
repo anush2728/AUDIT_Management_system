@@ -15,6 +15,7 @@ urlpatterns = [
     path('aud',views.aud,name='aud'),
     path('viewprofile',views.viewprofile,name='viewprofile'),
     path('edituser',views.edituser,name='edituser'),
+    path('anush',views.anush,name='anush')
     #path('edit',views.edit,name='edit')
     #path("",views.upload,name="upload")
 ]

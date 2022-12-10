@@ -21,6 +21,9 @@ def loginpage(request):
     else:
         return(render(request,'loginpage.html'))
 
+def anush(request):
+    return(render(request,'anush.html'))        
+
 def upload(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
